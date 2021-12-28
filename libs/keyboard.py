@@ -24,13 +24,11 @@ class HidKeyboard(object):
                               'KEY_RIGHTMETA': False,
                               'KEY_RIGHTSHIFT': False}
 
-    def __unicode__(self):
-        u_out = u'<HidKeyboard>\n'
-        u_out += u'  .s_mod_byte: %s %s\n' % (str(ord(self.s_mod_byte)).rjust(3, '0'), self._get_human_modifier())
-        return u_out
-
     def __str__(self):
-        return unicode(self).encode('utf8')
+        output = str('<HidKeyboard>\n')
+        output += u'  .s_mod_byte: %s %s\n' % (str(ord(self.s_mod_byte)).rjust(3, '0'), self._get_human_modifier())
+        return output
+        #return str(self).encode('utf8')
 
     def modifier_set(self, ps_mod_name, pi_value):
         """
@@ -185,6 +183,13 @@ class HidKeyboard(object):
         """
         if ps_key in self._ls_keys:
             self._ls_keys.remove(ps_key)
+    
+    def deactivate_all_keys(self):
+        """
+        Method to clear all active keys:
+        :return:
+        """
+        self._ls_keys.clear()
 
     def _get_mod_byte(self):
         """
@@ -203,5 +208,13 @@ class HidKeyboard(object):
                 i_mod_byte += i_mod_value
 
         return chr(i_mod_byte)
+
+    def reset_all_modifiers(self):
+        """
+        Method to clear all active modifiers:
+        :return:
+        """
+        for mod_name in self._db_modifiers.keys():
+            self._db_modifiers[mod_name] = False
 
     s_mod_byte = property(fget=_get_mod_byte, fset=None)

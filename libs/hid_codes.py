@@ -26,6 +26,13 @@ ds_MOD_CODES = {
                 'KEY_RIGHTMETA':          chr(0x80),  # 10000000 Right Meta (Windows key?)
 }
 
+ds_LOCKING_KEYS = {
+                'KEY_SCROLLLOCK':         chr(0x47),  # Keyboard Scroll Lock
+                'KEY_NUMLOCK':            chr(0x53),  # Keyboard Num Lock and Clear
+                'KEY_CAPSLOCK':           chr(0x39),  # Keyboard Caps Lock
+
+}
+
 ds_KEY_TO_HID = {
                 # Scan codes - last N slots in the HID report (usually 6). 0x00 if no key pressed. If more than N keys
                 #              are pressed, the HID reports "KEY_ERR_OVF" in all slots to indicate this condition.
